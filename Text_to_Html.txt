@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Internet Technology & Cloud Computing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background:linear-gradient(to right,#e3f2fd,#bbdefb);
+}
+header{
+    background:#0d47a1;
+    color:white;
+    padding:35px;
+    text-align:center;
+    animation:fadeIn 1.5s;
+}
+nav{
+    background:#1565c0;
+    text-align:center;
+    padding:12px;
+}
+nav a{
+    color:white;
+    margin:0 20px;
+    text-decoration:none;
+    font-weight:bold;
+}
+section{
+    background:white;
+    margin:30px;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.15);
+    animation:slideUp 1s;
+}
+h2{color:#0d47a1;}
+button{
+    background:#0d47a1;
+    color:white;
+    padding:12px 22px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:10px;
+}
+button:hover{background:#08306b; transform:scale(1.1);}
+.hidden{display:none;}
+table{width:100%; border-collapse:collapse; margin-top:15px;}
+th,td{border:1px solid #aaa; padding:12px; text-align:center;}
+footer{
+    background:#0d47a1;
+    color:white;
+    text-align:center;
+    padding:12px;
+    margin-top:30px;
+}
+
+/* Animations */
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+@keyframes slideUp{
+    from{transform:translateY(40px); opacity:0;}
+    to{transform:translateY(0); opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Internet Technology & Cloud Computing</h1>
+<p>Interactive Mastery Web Project</p>
+</header>
+
+<nav>
+<a href="#internet">Internet</a>
+<a href="#cloud">Cloud</a>
+<a href="#data">Data</a>
+</nav>
+
+<section id="internet">
+<h2>Internet Technologies</h2>
+<p>DNS converts website names into IP addresses. Routers move packets across networks.</p>
+<button onclick="showJourney()">Show Packet Journey</button>
+<p id="journey" class="hidden" style="margin-top:10px; font-weight:bold; color:#0d47a1;">
+User → DNS Server → Routers → Web Server → Back to User
+</p>
+</section>
+
+<section id="cloud">
+<h2>Cloud Computing</h2>
+<p>Client-side runs in your browser. Server-side runs on cloud servers.</p>
+<button onclick="toggleCloud()">Show Cloud Advantages</button>
+<ul id="cloudList" class="hidden" style="margin-top:10px; color:#333;">
+<li>Access anywhere</li>
+<li>Automatic backups</li>
+<li>Scalable storage</li>
+<li>Lower cost</li>
+</ul>
+</section>
+
+<section id="data">
+<h2>Data Transmission & Error Checking</h2>
+
+<table>
+<tr><th>Feature</th><th>USB</th><th>Broadband</th></tr>
+<tr><td>Speed</td><td>Up to 5 Gbps</td><td>Up to 1 Gbps</td></tr>
+<tr><td>Use</td><td>Local transfer</td><td>Internet access</td></tr>
+</table>
+
+<h3>Parity Check</h3>
+<input type="text" id="binary" placeholder="Enter 4-bit binary" style="padding:8px; width:150px;">
+<button onclick="checkData()">Check Data</button>
+<p id="result" style="margin-top:10px; font-weight:bold; color:green;"></p>
+</section>
+
+<footer>
+<p>© 2026 Web Technology Project</p>
+</footer>
+
+<script>
+// Show/hide packet journey
+function showJourney(){
+    let journey = document.getElementById("journey");
+    if(journey.classList.contains("hidden")){
+        journey.classList.remove("hidden");
+        journey.style.transition="all 0.5s";
+    } else {
+        journey.classList.add("hidden");
+    }
+}
+
+// Show/hide cloud advantages
+function toggleCloud(){
+    let cloud = document.getElementById("cloudList");
+    if(cloud.classList.contains("hidden")){
+        cloud.classList.remove("hidden");
+        cloud.style.transition="all 0.5s";
+    } else {
+        cloud.classList.add("hidden");
+    }
+}
+
+// Check binary input and parity
+function checkData(){
+    let data = document.getElementById("binary").value.trim();
+    if(data.length !== 4 || !/^[01]+$/.test(data)){
+        alert("Please enter exactly 4 bits using only 0 and 1");
+        return;
+    }
+
+    // Calculate parity (even parity example)
+    let ones = 0;
+    for(let i=0;i<data.length;i++){
+        if(data[i]==="1") ones++;
+    }
+    let parity = (ones % 2 === 0) ? "Even" : "Odd";
+    document.getElementById("result").innerHTML = 
+        `Data accepted. Parity is <b>${parity}</b>.`;
+}
+</script>
+
+</body>
+</html>
